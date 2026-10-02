@@ -113,25 +113,63 @@ ApplicationWindow {
                         cursorShape: Qt.PointingHandCursor
                     }
                 }
+
+                Rectangle {
+                    width: parent.width
+                    height: 48
+
+                    radius: 10
+
+                    color: window.currentPage === 2
+                           ? "#1d2733"
+                           : "transparent"
+
+                    Text {
+                        anchors.fill: parent
+                        anchors.leftMargin: 14
+
+                        verticalAlignment: Text.AlignVCenter
+
+                        text: "System"
+
+                        color: window.currentPage === 2
+                               ? "white"
+                               : "#8994a3"
+
+                        font.pixelSize: 15
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: {
+                            window.currentPage = 2
+                        }
+
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
             }
         }
+        
+        Item {
+            id: contentArea
 
-        Rectangle {
             width: parent.width - sidebar.width
             height: parent.height
+            Loader {
+                id: pageLoader
 
-            color: "#0d1117"
+                anchors.fill: parent
 
-            Text {
-                anchors.centerIn: parent
-
-                text: window.currentPage === 0
-                      ? "Dashboard"
-                      : "Work Time"
-
-                color: "white"
-                font.pixelSize: 32
-                font.bold: true
+                source: {
+                    if (window.currentPage === 0)
+                        return "Dashboard.qml"
+                    else if (window.currentPage === 1)
+                        return "WorkTime.qml"
+                    else
+                        return "System.qml"
+                }
             }
         }
     }
