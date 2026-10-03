@@ -4,17 +4,12 @@ import QtQuick.Window
 
 ApplicationWindow {
     id: window
-
     width: 1200
     height: 760
     visible: true
-
     title: "Montown"
-
     color: "#0d1117"
-
     property int currentPage: 0
-
     Row {
         anchors.fill: parent
 
@@ -23,7 +18,6 @@ ApplicationWindow {
 
             width: 220
             height: parent.height
-
             color: "#11161d"
 
             Column {
@@ -159,9 +153,7 @@ ApplicationWindow {
             height: parent.height
             Loader {
                 id: pageLoader
-
                 anchors.fill: parent
-
                 source: {
                     if (window.currentPage === 0)
                         return "Dashboard.qml"
